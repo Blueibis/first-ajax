@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
     $.ajax( {
       url: 'http://first-ajax-api.herokuapp.com/time',
       method: 'GET',
-      data: { timezone: 'Pacific/Honolulu' },
       dataType: 'text',
     }).done(function(response) {
       var time = document.createElement('p');
