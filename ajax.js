@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var button3 = document.querySelector('button#step7');
   var button4 = document.querySelector('button#step8');
   var button5 = document.querySelector('button#step9');
+  var formSubmit = document.querySelector('input[type="submit"]');
+  var timezoneInput = document.querySelector('input[name="timezone"]');
 
   button1.addEventListener('click', function() {
     $.ajax( {
@@ -57,6 +59,24 @@ document.addEventListener("DOMContentLoaded", function() {
       var time = document.createElement('p');
       time.innerHTML = response;
       document.querySelector('section#step8').append(time);
+    })
+  });
+
+  formSubmit.addEventListener('click', function(e) {
+    e.preventDefault();
+    $.ajax( {
+        url: 'http://first-ajax-api.herokuapp.com/time',
+        method: 'GET',
+        data: { timezone: timezoneInput.value },
+        dataType: 'text',
+    }).done(function(response) {
+      var time = document.createElement('p');
+      time.innerHTML = response;
+      document.querySelector('section#step8').append(time);
+    }).fail(function() {
+      var msg = document.createElement('p');
+      msg.innerHTML = 'The timezone you tried to submit probably doesn\'t exist. Try again?';
+      document.querySelector('section#step8').append(msg);
     })
   });
 
