@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   button2.addEventListener('click', function() {
     $.ajax( {
-      url: 'http://first-ajax-api.herokuapp.com/ping',
+      url: 'http://first-ajax-api.herokuapp.com/pong',
       method: 'GET',
-      dataType: 'html',
+      dataType: 'text',
     }).done(function(responseData) {
       console.log(responseData);
       var response = document.createElement('p');
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
       document.querySelector('#step3456').append(response);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       var failMessage = document.createElement('p');
-      failMessage.innerHTML = 'Something went wrong! We\'ll try out best to fix this, sorry!'
+      failMessage.innerHTML = jqXHR.responseText ? jqXHR.responseText : 'Something went wrong! We\'ll try out best to fix this, sorry!'
       document.querySelector('#step3456').append(failMessage);
     }).always(function() {
       console.log('Request completed!!!')
